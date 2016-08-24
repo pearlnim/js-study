@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function(){
+	//Exam1 
+	var exam1 = $('.exam_wrap').eq(0),
+		exam1Btn = exam1.find('button');
+
+	var exam1Result = function(){
+		var i = 0;
+		while (i < 5) {
+			exam1.find('.exam_q').append('<input type="text"/>');
+			i++;
+		}
+	}
+	exam1Btn.on('click', exam1Result);
+
+	//Exam2 
+	var exam2 = $('.exam_wrap').eq(1),
+		exam2Btn = exam2.find('button');
+
+	var exam2Result = function(){
+		var i = 0;
+		while (i < 5) {
+			if (i % 2 == 0) {
+				console.log(i);
+				exam2.find('.exam_q').append('<input type="checkbox"/>');
+			}
+			else{
+				exam2.find('.exam_q').append('<input type="text"/>');
+			}
+			i++;
+		}
+	}
+	exam2Btn.on('click', exam2Result);
+
+	//Exam3 
+	var exam3 = $('.exam_wrap').eq(2),
+		exam3Btn = exam3.find('button'),
+		exam3Multipl = '';
+		exam3Num = 8;
+
+	var exam3Result = function(){
+		for (i=1; i<10; i++) {
+			exam3Multipl = exam3Num + '*' + i + '=' + exam3Num*i;
+			exam3.find('.exam_q').append(exam3Multipl + '</br>');
+		}
+	}
+	exam3Btn.on('click', exam3Result);
+
+	//Exam4 
+	var exam4 = $('.exam_wrap').eq(3),
+		exam4Btn = exam4.find('button'),
+		exam4Multipl = '';
+		exam4El = '';
+
+	var exam4Result = function(){
+		for (i=2; i<10; i++) {
+			exam4El = '<p class="mutipl-box">';
+			for(j=1;j<10;j++){
+				exam4Multipl = i + '*' + j + '=' + i*j;
+				exam4El += exam4Multipl + '<br/>';
+			}
+			exam4El += '</p>';
+			exam4.find('.exam_q').append(exam4El);
+		}
+	}
+	exam4Btn.on('click', exam4Result);
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. while문으로 input 5개 생성 </h1>
+			<button class="exam_btn">Show Result</button>
+			<div class="exam_q"></div>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. while문으로 input 5개 생성하되 짝수는 text,  홀수는 checkbox 로</h1>
+			<button class="exam_btn">Show Result</button>
+			<div class="exam_q"></div>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. for문으로 구구단 8단 출력하기</h1>
+			<button class="exam_btn">Show Result</button>
+			<div class="exam_q"></div>
+		</div>
+		<div class="exam_wrap">
+			<h1>Bonus. for문으로 구구단 전부 출력하기</h1>
+			<button class="exam_btn">Show Result</button>
+			<div class="exam_q"></div>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>

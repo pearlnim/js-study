@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function(){
+	//Exam1 
+	var exam1 = $('.exam_wrap').eq(0),
+		exam1Btn = exam1.find('button'),
+		exam1List = exam1.find('ul'),
+		exam1ListChild = exam1List.find('li'),
+		exam1Color = 'yellow',
+		exam1Index = 0;
+
+	var exam1Plus = function() {
+		exam1ListChild.eq(exam1Index).css('background',exam1Color);
+		exam1Index = exam1Index + 1;
+		if(exam1Index >= exam1ListChild.length){
+			exam1Index = 0;
+			if(exam1Color == 'yellow'){
+				exam1Color = 'red';
+
+			}
+			else{ exam1Color = 'yellow'}			
+		}
+	};
+	exam1Btn.on('click', exam1Plus);
+
+	//Exam2
+	var exam2 = $('.exam_wrap').eq(1),
+		exam2Btn = exam2.find('button'),
+		exam2List = exam2.find('ul'),
+		exam2ListChild = exam2List.find('li'),
+		exam2Color = 'yellow',
+		exam2Index = exam2ListChild.length - 1;
+
+	var exam2Minus = function() {
+		exam2ListChild.eq(exam2Index).css('background',exam2Color);
+		exam2Index = exam2Index - 1;
+		if(exam2Index <= -1){
+			exam2Index = exam2ListChild.length - 1;
+			if(exam2Color == 'yellow'){
+				exam2Color = 'red';
+			}
+			else{ exam2Color = 'yellow'}			
+		}
+	};
+	exam2Btn.on('click', exam2Minus);
+
+	//Exam3
+	var exam3 = $('.exam_wrap').eq(2),
+		exam3BtnPlus = exam3.find('.js-btn-plus'),
+		exam3BtnMinus = exam3.find('.js-btn-minus'),
+		exam3List = exam3.find('ul'),
+		exam3ListChild = exam3List.find('li'),
+		exam3Color = 'yellow',
+		exam3Index = 0;
+		exam3Length = exam3ListChild.length;
+
+	var exam3Plus = function() {
+		if(exam3Index == -1 || exam3Index == exam3Length -1 ){
+			exam3ListChild.eq(exam3Length - 1).css('background','none');	
+			exam3Index = -1;
+		}
+		exam3Index = exam3Index + 1;
+		exam3ListChild.eq(exam3Index).css('background',exam3Color);
+		exam3ListChild.eq(exam3Index).prev().css('background','none');
+	};
+
+	var exam3Minus = function() {
+		if(exam3Index == 0 || exam3Index == exam3Length){
+			exam3ListChild.eq(0).css('background','none');	
+			exam3Index = exam3Length;
+		}
+		exam3Index = exam3Index - 1;
+		exam3ListChild.eq(exam3Index).css('background',exam3Color);
+		exam3ListChild.eq(exam3Index).next().css('background','none');
+	};
+
+	exam3BtnPlus.on('click', exam3Plus);
+	exam3BtnMinus.on('click', exam3Minus);
+
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 처음부터 순서대로 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li>one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+				</ul>
+			</div>
+			<button type="button">plus</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 마지막부터 역순대로 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li>one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+				</ul>
+			</div>
+			<button type="button">minus</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li style="background-color:yellow">one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+					<li>nine</li>
+				</ul>
+			</div>
+			<button type="button" class="js-btn-plus">plus</button>
+			<button type="button" class="js-btn-minus">minus</button>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>
