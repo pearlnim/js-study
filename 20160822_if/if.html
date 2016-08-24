@@ -7,24 +7,76 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(function(){
-
-	// exam1 [s]
+	//Exam1 
 	var exam1 = $('.exam_wrap').eq(0),
-	exam1Btn = exam1.find('button'),
-	exam1List = exam1.find('ul'),
-	exam1ListChild = exam1List.children(),
-	exam1_color = 'yellow',
-	exam1_index = 0;
+		exam1Btn = exam1.find('button'),
+		exam1List = exam1.find('ul'),
+		exam1ListChild = exam1List.find('li'),
+		exam1Color = 'yellow',
+		exam1Index = 0;
 
-	exam1Btn.on('click', function(){
-		exam1ListChild.eq(exam1_index).css('background', exam1_color);
-		exam1_index = exam1_index + 1;
-		if(exam1_index >= exam1ListChild.length){
-			exam1_index = 0;
-			exam1_color = 'red';
+	exam1Btn.on('click', function() {
+		exam1ListChild.eq(exam1Index).css('background',exam1Color);
+		exam1Index = exam1Index + 1;
+		if(exam1Index >= exam1ListChild.length){
+			exam1Index = 0;
+			if(exam1Color == 'yellow'){
+				exam1Color = 'red';
+			}
+			else{ exam1Color = 'yellow'}			
 		}
 	});
-	// exam1 [e]
+
+	//Exam2
+	var exam2 = $('.exam_wrap').eq(1),
+		exam2Btn = exam2.find('button'),
+		exam2List = exam2.find('ul'),
+		exam2ListChild = exam2List.find('li'),
+		exam2Color = 'yellow',
+		exam2Index = exam2ListChild.length - 1;
+
+	exam2Btn.on('click', function() {
+		exam2ListChild.eq(exam2Index).css('background',exam2Color);
+		console.log(exam2Index);
+		exam2Index = exam2Index - 1;
+		if(exam2Index <= -1){
+			exam2Index = exam2ListChild.length - 1;
+			if(exam2Color == 'yellow'){
+				exam2Color = 'red';
+			}
+			else{ exam2Color = 'yellow'}			
+		}
+	});
+
+	//Exam3
+	var exam3 = $('.exam_wrap').eq(2),
+		exam3BtnPlus = exam3.find('.js-btn-plus'),
+		exam3BtnMinus = exam3.find('.js-btn-minus'),
+		exam3List = exam3.find('ul'),
+		exam3ListChild = exam3List.find('li'),
+		exam3Color = 'yellow',
+		exam3Index = 0;
+		exam3Length = exam3ListChild.length;
+
+	exam3BtnPlus.on('click', function() {
+		if(exam3Index == -1 || exam3Index == exam3Length -1 ){
+			exam3ListChild.eq(exam3Length - 1).css('background','none');	
+			exam3Index = -1;
+		}
+		exam3Index = exam3Index + 1;
+		exam3ListChild.eq(exam3Index).css('background',exam3Color);
+		exam3ListChild.eq(exam3Index).prev().css('background','none');
+	});
+
+	exam3BtnMinus.on('click', function() {
+		if(exam3Index == 0 || exam3Index == exam3Length){
+			exam3ListChild.eq(0).css('background','none');	
+			exam3Index = exam3Length;
+		}
+		exam3Index = exam3Index - 1;
+		exam3ListChild.eq(exam3Index).css('background',exam3Color);
+		exam3ListChild.eq(exam3Index).next().css('background','none');
+	});
 
 });
 </script>
@@ -85,8 +137,8 @@ $(function(){
 					<li>nine</li>
 				</ul>
 			</div>
-			<button type="button">minus</button>
-			<button type="button">plus</button>
+			<button type="button" class="js-btn-plus">plus</button>
+			<button type="button" class="js-btn-minus">minus</button>
 		</div>
 	</div>
 	<!-- container [e] -->
